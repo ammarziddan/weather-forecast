@@ -1,4 +1,4 @@
-const weatherAPI = 'http://api.weatherapi.com/v1/forecast.json?key=14afd0c9ee4c4780868134847250306&q=auto:ip&days=1';
+const weatherAPI = 'https://api.weatherapi.com/v1/forecast.json?key=14afd0c9ee4c4780868134847250306&q=auto:ip&days=1';
 
 function updateCurrentData(data) {
     return /*html*/ `<div class="col-md-5 d-flex flex-column justify-content-start mb-3 ps-5">
