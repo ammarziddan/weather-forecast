@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid #fff; */
+}
+
+p,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
+/* 
+LIGHT PALLETE:
+Background	#E8E8E8
+Text	#000000
+Surface/Panel	#CFCFCF
+*/
+
+body {
+    background-color: #171717;
+    color: #FFFFFF;
+}
+
+ul {
+    list-style: none;
+}
+
+.mt-n1 {
+    margin-top: -0.3rem;
+}
+
+.wind-dir {
+    display: inline-block;
+}
+
+.forecast-element {
+    width: 100px;
+    background-color: #303030;
+}
+
+.forecast-element-current {
+    width: 100px;
+    background-color: #CFCFCF;
+    color: #000000;
+}
+
+.placeholder-img {
+    margin: 15px;
+    width: 90px;
+    height: 90px;
+}
+
+.placeholder-forecast {
+    /* total 84 */
+    margin: 4px 4px 0 4px;
+    width: 76px;
+    height: 76px;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather API</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container pt-4">
+    <h1 class="fs-1 fw-semibold mb-4 ps-2">Current Weather</h1>
+    <div id="current-wrapper" class="row justify-content-start">
+      <div class="col-md-5 d-flex flex-column justify-content-start mb-3 placeholder-glow">
+        <!-- location.name -->
+        <h2 class="fs-3 fw-medium mb-1 placeholder col-4"></h2>
+        <!-- location.region -->
+        <h3 class="fs-3 fw-normal mb-1">
+          <span class="placeholder h-25">xxxxxxxxxx</span> <span class="placeholder h-25">xxxxxxxxxx</span>
+        </h3>
+        <!-- location.localtime -->
+        <h4 class="fs-4 fw-normal mb-2">
+          <span class="placeholder h-25">xxxxxxxxxx</span> <span class="placeholder h-25">xxxxxxxxxxxx</span>
+        </h4>
+        <!-- current.last_updated -->
+        <h5 class="fw-light fs-6">
+          <span class="placeholder h-25">xxxxxxxxxxxxx</span> <span class="placeholder h-25">xxxxxxxxxx</span>
+          <span class="placeholder">xxxxx</span>
+        </h5>
+      </div>
+      <div class="col-md-5 placeholder-glow">
+        <!-- current.condition.text -->
+        <h2 class="fs-3 fw-medium placeholder w-50"></h2>
+        <div class="row justify-content-start gap-md-3">
+          <div class="col-lg-2 col-3">
+            <!-- current.condition.icon -->
+            <div class="placeholder-img placeholder"></div>
+          </div>
+          <div class="col d-flex align-items-center">
+            <ul>
+              <!-- current.temp_c -->
+              <li>
+                <h5 class="fw-light fs-6 mb-1">
+                  <span class="placeholder h-25">xxxxxxx</span> <span class="placeholder h-25">xxxxxx</span>
+                </h5>
+              </li>
+              <!-- current.wind_kph -->
+              <li>
+                <h5 class="fw-light fs-6 mb-1">
+                  <span class="placeholder h-25">xxxxx</span> <span class="placeholder h-25">xxxxxxxx</span>
+                  <span class="placeholder h-25">x</span>
+                </h5>
+              </li>
+              <!-- current.humidity -->
+              <li>
+                <h5 class="fw-light fs-6 mb-1">
+                  <span class="placeholder h-25">xxxxxxxxx</span> <span class="placeholder h-25">xxxx</span>
+                </h5>
+              </li>
+              <!-- current.precip -->
+              <li>
+                <h5 class="fw-light fs-6 mb-1">
+                  <span class="placeholder h-25">xxxxxxxxxxxxxx</span> <span class="placeholder">xxxxxxx</span>
+                </h5>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <h1 class="fs-1 fw-semibold mb-4 ps-2">Forecast</h1>
+    <div id="forecast-wrapper" class="d-inline-flex justify-content-center flex-wrap gap-3 mb-5">
+      <div class="forecast-element d-flex flex-column text-center rounded-4 p-2 fw-light placeholder-glow">
+        <p><span class="placeholder h-25 w-50"></span></p>
+        <div class="placeholder-forecast placeholder"></div>
+        <p><span class="placeholder h-25 w-50"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
