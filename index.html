@@ -13,6 +13,18 @@
 
 <body>
   <div class="container pt-4">
+    <div class="row justify-content-center">
+      <div class="search-wrapper col-md-8 col-lg-6 d-flex mb-3 position-relative p-0">
+        <input type="search" class="search-input mx-3 w-100" placeholder="Search location">
+
+        <!-- SEARCH SUGGESTION -->
+        <div class="suggestion-wrapper position-absolute d-flex start-0 w-100 z-3 d-none">
+          <div class="w-100 mx-3 suggestion">
+            <p id="get-location" class="suggestion-item px-4">Get your current location</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <h1 class="fs-1 fw-semibold mb-4 ps-2">Current Weather</h1>
     <div id="current-wrapper" class="row justify-content-start">
       <div class="col-md-5 d-flex flex-column justify-content-start mb-3 placeholder-glow">
@@ -78,6 +90,8 @@
     <h1 class="fs-1 fw-semibold mb-4 ps-2">Forecast</h1>
     <div id="forecast-wrapper" class="d-inline-flex justify-content-center flex-wrap gap-3 mb-5"></div>
   </div>
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
