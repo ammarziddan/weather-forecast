@@ -1,4 +1,5 @@
 let baseURL = 'https://api.weatherapi.com/v1/forecast.json?key=14afd0c9ee4c4780868134847250306&days=1';
+let searchURL = 'https://api.weatherapi.com/v1/search.json?key=14afd0c9ee4c4780868134847250306';
 const defaultLocation = '&q=auto:ip';
 let weatherAPI = baseURL + defaultLocation;
 
@@ -23,6 +24,97 @@ async function updatePosition() {
     }
 }
 // ---GET USER LOCATION
+
+// SEARCH LOCATION
+const searchInput = document.querySelector('.search-input');
+const searchSuggestion = document.querySelector('.suggestion-wrapper');
+searchInput.addEventListener('focus', () => {
+    searchSuggestion.classList.remove('d-none');
+})
+searchInput.addEventListener('blur', () => {
+    searchSuggestion.classList.add('d-none');
+})
+
+const getLocationBtn = document.querySelector('#get-location');
+getLocationBtn.addEventListener('mousedown', updatePosition);
+
+function startDebounce() {
+    let timeout;
+    return function debounce(fn, delay, ...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            fn(...args)
+        }, delay)
+    }
+}
+
+// clear all suggestion item except 'Get your location'
+function clearSuggestions() {
+    const oldSuggestions = document.querySelectorAll('.suggestion-item');
+    for(let i = 1; i < oldSuggestions.length; i++) {
+        oldSuggestions[i].remove();
+    }
+}
+
+// search function
+async function search(val) {
+    const keyword = `&q=${val}`;
+    const searchResult = await fetchWeather(searchURL + keyword);
+    try {
+        if(searchResult.error) {
+            throw new Error(searchResult.error);
+        } 
+        if (searchResult.length === 0) {
+            throw new Error("Couldn't find the location you're looking for");
+        }
+        // TODO: add loading when searching
+        clearSuggestions();
+        // append suggestions
+        updateSuggestionUI(searchResult);
+    } catch (error) {
+        clearSuggestions();
+        // show error
+        showSuggestionError(error.message);
+    }
+}
+
+const searchDebounce = startDebounce();
+searchInput.addEventListener('input', e => {
+    if (e.target.value.length !== 0) {
+        searchDebounce(search, 500, e.target.value);
+    }
+});
+
+// change ui by search result selected
+searchSuggestion.addEventListener('mousedown', async (e) => {
+    if (!e.target.dataset.id) {
+        e.preventDefault();
+        return;
+    }
+    setPlaceholderUI();
+    // ! weatherapi.com sometimes doesn't give you a correct location even when you querying by id
+    // check if dataset.id result (name) != e.target.closest('p').value
+    const idResult = await fetchWeather(searchURL + `&q=id:${e.target.closest('p').dataset.id}`);
+    try {
+        const currentName = e.target.closest('p').firstChild.textContent.trim()
+        let isCorrectName = false;
+        for(let i = 0; i < idResult.length; i++) {
+            if(idResult[i].name == currentName) {
+                isCorrectName = true;
+            }
+        }
+        let keyword = `&q=id:${e.target.closest('p').dataset.id}`
+        if(isCorrectName === false) {
+            keyword = `&q=${currentName}`;
+        }
+        updateUI(baseURL + keyword);
+    } catch (error) {
+        // TODO: handle the error
+        console.log(error.message);
+    }
+
+})
+// ---SEARCH LOCATION
 
 // UPDATE UI
 // set placeholder UI
@@ -95,6 +187,26 @@ function updateForecastData(data, currentHour) {
     }
 }
 
+const suggestion = document.querySelector('.suggestion');
+// add suggestion ui
+function updateSuggestionUI(arr) {
+    let suggestions = "";
+    arr.forEach(item => {
+        suggestions += /*html*/`<p class="suggestion-item px-4" data-id="${item.id}">
+        ${item.name} <span><i>${item.region}, ${item.country}</i></span>
+        </p>`;
+    });
+    suggestion.insertAdjacentHTML('beforeend', suggestions);
+}
+
+// show suggestion error
+function showSuggestionError(message) {
+    const error = /*html*/`<p class="suggestion-item suggestion-error px-4">
+                               <span><i>${message}</i></span>
+                           </p>`;
+    suggestion.insertAdjacentHTML('beforeend', error);
+}
+
 const updateUI = async function(url) {
     const currentData = await fetchWeather(url);
     try {
@@ -114,13 +226,14 @@ const updateUI = async function(url) {
         const forecastWrapper = document.querySelector('#forecast-wrapper');
         forecastWrapper.innerHTML = forecastCards;
     } catch (error) {
+        // TODO: return error when: excedding api quota, invalid key, internal app error
         console.log(error.message);
     }
 }
 // ---UPDATE UI
 
 // FETCH WEATHER API
-function fetchWeather(url) {
+async function fetchWeather(url) {
     return fetch(url)
         .then(response => response.json())
         .then(data => data);

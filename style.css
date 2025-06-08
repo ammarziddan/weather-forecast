@@ -45,8 +45,8 @@ ul {
 
 .forecast-element-current {
     width: 100px;
-    background-color: #CFCFCF;
-    color: #000000;
+    background-color: #5A5A5A;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .placeholder-img {
@@ -60,4 +60,68 @@ ul {
     margin: 4px 4px 0 4px;
     width: 76px;
     height: 76px;
+}
+
+.search-input {
+    padding: 12px 18px 12px 18px;
+    background-color: #303030;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px #5A5A5A;
+}
+
+.search-input::placeholder {
+    color: #9F9F9F;
+}
+
+.search-input:hover {
+    background-color: #5A5A5A;
+}
+
+.location-btn {
+    padding: .25rem .5rem;
+    font-size: .75rem;
+}
+
+.suggestion-wrapper {
+    top: 55px;
+}
+
+.suggestion-item {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    cursor: pointer;
+    background-color: #5A5A5A;
+
+    & span {
+        color: #acacac;
+    }
+}
+
+.suggestion-item:first-child:last-child {
+    border-radius: 12px;
+}
+
+.suggestion-item:nth-child(1) {
+    border-radius: 12px 12px 0 0;
+}
+
+.suggestion-item:nth-last-child(1) {
+    border-radius: 0 0 12px 12px;
+}
+
+.suggestion-item:hover {
+    background-color: #454545;
+    transition: 0.3s ease;
 }
